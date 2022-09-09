@@ -1,0 +1,207 @@
+//attempt to standarde spacings
+$vsmVerticalSpace: 15px;
+$smVerticalSpace: 30px;
+$mdVerticalSpace: 40px;
+$lgVerticalSpace: 60px;
+$xlVerticalSpace: 90px;
+
+@function fillList($list, $n, $item) {
+    @if($n>0) {
+        @for $i from 1 through $n {
+
+            $list: append($list, $item);
+        }
+    }
+
+    @return $list;
+}
+
+@mixin responsiveVSpacing_standard($type:"margin") {
+    @include responsiveVSpacing($type, ($vsmVerticalSpace, $smVerticalSpace, $mdVerticalSpace, $lgVerticalSpace, $xlVerticalSpace))
+}
+
+@mixin responsiveVSpacing($type, $values:()) {
+    //$type:margin or padding
+    $extra: 6 - length($values);
+    $values: fillList($values, $extra, null);
+
+    @if(nth($values, 1)) {
+
+        @include media("<=smMin") {
+            #{$type}-left: nth($values, 1);
+            #{$type}-right: nth($values, 1);
+        }
+
+    }
+
+    @if(nth($values, 2)) {
+        @include media_template("sm") {
+            #{$type}-left: nth($values, 2);
+            #{$type}-right: nth($values, 2);
+        }
+    }
+
+    @if(nth($values, 3)) {
+        @include media_template("md") {
+            #{$type}-left: nth($values, 3);
+            #{$type}-right: nth($values, 3);
+        }
+    }
+
+    @if(nth($values, 4)) {
+        @include media_template("lg") {
+            #{$type}-left: nth($values, 4);
+            #{$type}-right: nth($values, 4);
+        }
+    }
+
+    @if(nth($values, 5)) {
+        @include media_template("xl") {
+            #{$type}-left: nth($values, 5);
+            #{$type}-right: nth($values, 5);
+        }
+    }
+
+    @if(nth($values, 6)) {
+        @include media_template("xxl") {
+            #{$type}-left: nth($values, 6);
+            #{$type}-right: nth($values, 6);
+        }
+    }
+}
+
+
+
+$defaulFontSize:14px;
+$smFontSize:16px;
+$lgFontSize:18px;
+
+@mixin responsiveFontsize($mod:()) {
+    $extra: 6 - length($mod);
+    $mod: fillList($mod, $extra, null);
+
+    @if(nth($mod, 1)) {
+        @include media("<=smMin") {
+            font-size: nth($mod, 1);
+        }
+    }
+
+    @if(nth($mod, 2)) {
+        @include media_template("sm") {
+            font-size: nth($mod, 2);
+        }
+    }
+
+    @if(nth($mod, 3)) {
+        @include media_template("md") {
+            font-size: nth($mod, 3);
+        }
+    }
+
+    @if(nth($mod, 4)) {
+        @include media_template("lg") {
+            font-size: nth($mod, 4);
+        }
+
+    }
+
+    @if(nth($mod, 5)) {
+        @include media_template("xl") {
+            font-size: nth($mod, 5);
+        }
+    }
+
+    @if(nth($mod, 6)) {
+        @include media_template("xxl") {
+            font-size: nth($mod, 6);
+        }
+    }
+
+}
+
+//breakpoints
+$smMin: 576px;
+$mdMin: 768px;
+$lgMin: 992px;
+$xlMin: 1200px;
+$xxlMin: 2000px;
+
+@function translate-media-condition($c) {
+    $condMap: ("screen": "only screen",
+        "print": "only print",
+        "retina": "(-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-device-pixel-ratio: 1.5), (min-resolution: 120dpi)",
+        ">smMin": "(min-width: #{$smMin + 1})",
+        "<smMin": "(max-width: #{$smMin - 1})",
+        ">=smMin": "(min-width: #{$smMin})",
+        "<=smMin": "(max-width: #{$smMin})",
+        ">mdMin": "(min-width: #{$mdMin + 1})",
+        "<mdMin": "(max-width: #{$mdMin - 1})",
+        ">=mdMin": "(min-width: #{$mdMin})",
+        "<=mdMin": "(max-width: #{$mdMin})",
+        ">lgMin": "(min-width: #{$lgMin + 1})",
+        "<lgMin": "(max-width: #{$lgMin - 1})",
+        ">=lgMin": "(min-width: #{$lgMin})",
+        "<=lgMin": "(max-width: #{$lgMin})",
+        ">xlMin": "(min-width: #{$xlMin + 1})",
+        "<xlMin": "(max-width: #{$xlMin - 1})",
+        ">=xlMin": "(min-width: #{$xlMin})",
+        "<=xlMin": "(max-width: #{$xlMin})",
+        ">xxlMin": "(min-width: #{$xxlMin + 1})",
+        "<xxlMin": "(max-width: #{$xxlMin - 1})",
+        ">=xxlMin": "(min-width: #{$xxlMin})",
+        "<=xxlMin": "(max-width: #{$xxlMin})"
+
+    );
+    @return map-get($condMap, $c);
+
+}
+
+@mixin media($args...) {
+    $query: "";
+
+    @each $arg in $args {
+        $op: "";
+
+        @if ($query !="") {
+            $op: " and ";
+        }
+
+        $query: $query+$op+translate-media-condition($arg);
+    }
+
+    @media #{$query} {
+        @content;
+    }
+}
+
+@mixin media_template($arg) {
+    @if $arg=="sm" {
+        @include media(">=smMin", "<=mdMin") {
+            @content;
+        }
+    }
+
+    @else if $arg=="md" {
+        @include media(">=mdMin", "<=lgMin") {
+            @content;
+        }
+    }
+
+    @else if $arg=="lg" {
+        @include media(">=lgMin", "<=xlMin") {
+            @content;
+        }
+    }
+
+    @else if $arg=="xl" {
+        @include media(">=xlMin", "<=xxlMin") {
+            @content;
+        }
+    }
+
+    @else if $arg=="xxl" {
+        @include media(">=xxlMin") {
+            @content;
+        }
+    }
+}

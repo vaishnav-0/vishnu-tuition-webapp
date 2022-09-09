@@ -1,0 +1,21 @@
+WEBVTT
+
+
+00:00:00.000-->00:03:00.000
+nested structure
+
+00:03:00.000 -->00:07:35.000
+program on nested structure
+
+00:07:35.000-->00:11:08.000
+array of structures
+
+00:11:08.000-->00:20:25.000
+ program on array of structure
+
+00:20:25.000-->00:25:17.000
+union
+
+00:25:17.000 --> 01:00:00.000
+enumerated data type
+

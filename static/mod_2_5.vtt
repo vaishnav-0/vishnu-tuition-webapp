@@ -1,0 +1,27 @@
+WEBVTT
+
+
+00:00:00.000 --> 00:02:00.000
+control statements
+
+00:02:00.000 --> 00:03:41.000
+types of control statements
+
+00:03:41.000 -->00:17:07.000
+selections -If
+
+00:17:07.000 --> 00:21.12.000
+odd or even using IF
+
+00:21:12.000 -->00:23:30.000
+comparison bw 2 numbers using IF
+
+00:23:30.000 --> 00:25:52.000
+largest bw 3 numbers using IF
+
+00:25:52.000 --> 00:31:10.000
+leap year using IF
+
+00:31:10.000 -->01:00:00.000
+grade printing using IF(else if ladder)
+

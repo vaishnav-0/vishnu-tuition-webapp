@@ -1,0 +1,66 @@
+@import "src/breakpoints.scss";
+@import "src/colors.scss";
+@import "src/styles/mixins.scss";
+
+.sidenav-container {
+    display: flex;
+    height: 100%;
+    flex-direction: row; ///
+
+    &.overflow {
+        flex-direction: column;
+
+        .nav-list {
+            flex-direction: row;
+        }
+    }
+
+
+}
+
+.cue-point{
+    color:#2F54EB;
+    cursor: pointer;
+}
+
+.nav-container {
+    background-color: $greyBackground;
+    padding: 0 1em;
+    overflow: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.nav-list {
+    display: flex;
+    list-style-type: none;
+    font-weight: 900;
+    padding: 0;
+    flex-direction: column;
+
+
+    &>li {
+        flex-shrink: 0;
+        padding: 1em;
+    }
+
+    & a {
+        text-decoration: none;
+        color: $greyText;
+        border: none;
+    }
+
+    & .active {
+        color: $primary;
+    }
+}
+
+.content {
+    flex: 1;
+    padding: 1em;
+    overflow-x: scroll;
+}

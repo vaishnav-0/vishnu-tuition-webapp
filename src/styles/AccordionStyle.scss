@@ -1,0 +1,72 @@
+@import 'src/colors.scss';
+
+.accordion {
+    border-radius: 0.6em;
+}
+
+
+.accordion__button {
+    position: relative;
+    color: $primary;
+    cursor: pointer;
+    padding: 18px;
+    padding-right: 2.3em;
+    width: 100%;
+    text-align: left;
+    border: none;
+    font-weight: 900;
+}
+.accordion__item{
+    background-color: $primaryBackground;
+    border-radius: 0.6em;
+    margin-bottom: 1.5em;
+
+}
+
+.accordion__button:after {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    position: absolute;
+    right: 0;
+    content: '\f067';
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    height: 1.8em;
+    width: 1.8em;
+    margin-right: 1em;
+    background-color: white;
+    border-radius: 50%;
+    font-size: 0.8em;
+
+}
+
+.accordion__button[aria-expanded='true']::after,
+.accordion__button[aria-selected='true']::after {
+    content: '\f068';
+}
+
+[hidden] {
+    display: none;
+}
+
+.accordion__panel {
+    animation: fadein 0.35s ease-in;
+}
+
+/* -------------------------------------------------- */
+/* ---------------- Animation part ------------------ */
+/* -------------------------------------------------- */
+
+@keyframes fadein {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
